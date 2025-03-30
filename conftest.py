@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
 from utilities.common_utils import load_config
+from selenium.webdriver.chrome.options import Options
 import time
 
 @pytest.fixture(scope="session")
@@ -14,7 +15,9 @@ def config():
 
 @pytest.fixture(scope="session")
 def driver(config):
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=chrome_options)
     driver.maximize_window()
     driver.get(config["base_url"])  # Set up the base URL once
     yield driver
