@@ -5,7 +5,6 @@ from pages.customize_product_add_to_card import CustomizeProductAddToCard
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import allure
 import time 
 # from pages.product_page import ProductPage
 # from pages.cart_page import CartPage
@@ -16,9 +15,6 @@ def wait(driver):
     return WebDriverWait(driver, 10)
 
 
-@allure.feature("Open Website")
-@allure.story("Check Google Home Page")
-@allure.severity(allure.severity_level.CRITICAL)
 def test_current_title(driver):
     assert driver.title == "Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!"
 def test_search_product(driver):
