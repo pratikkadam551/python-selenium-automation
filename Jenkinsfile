@@ -12,16 +12,16 @@ pipeline {
             }
         }
 
-        stage('Setup Python Virtual Environment') {
-            steps {
-                sh '''
-                    python3 -m venv $VENV_PATH
-                    . $VENV_PATH/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                '''
-            }
-        }
+        // stage('Setup Python Virtual Environment') {
+        //     steps {
+        //         sh '''
+        //             python3 -m venv $VENV_PATH
+        //             . $VENV_PATH/bin/activate
+        //             pip install --upgrade pip
+        //             pip install -r requirements.txt
+        //         '''
+        //     }
+        // }
 
         stage('Run Pytest') {
             steps {
