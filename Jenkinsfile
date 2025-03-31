@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/pratikkadam551/python-selenium-automation.git'
+                git branch: 'main', url: 'https://github.com/pratikkadam551/python-selenium-automation.git'
             }
         }
 
