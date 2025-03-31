@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // Runs on any available Jenkins agent
+    agent any 
 
     environment {
         VENV_PATH = "venv"
@@ -11,18 +11,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/pratikkadam551/python-selenium-automation.git'
             }
         }
-
-        // stage('Setup Python Virtual Environment') {
-        //     steps {
-        //         sh '''
-        //             python3 -m venv $VENV_PATH
-        //             . $VENV_PATH/bin/activate
-        //             pip install --upgrade pip
-        //             pip install -r requirements.txt
-        //         '''
-        //     }
-        // }
-
         stage('Run Pytest') {
             steps {
                 sh '''
