@@ -21,12 +21,4 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            archiveArtifacts artifacts: '**/*.log', fingerprint: true
-        }
-        failure {
-            echo 'Tests failed! Check logs.'
-        }
-    }
 }
