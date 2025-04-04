@@ -32,7 +32,7 @@ def test_filters_and_select_brand(driver,wait):
     assert check_selected_value == "₹10000-₹30000+"
     search_results_page.apply_brand_filters("Apple")
     assert driver.find_element(*search_results_page.FIRST_PRODUCT_XPATH).is_displayed()
-    search_results_page.select_brand("Apple iPhone 14 (Starlight, 256 GB)")
+    search_results_page.select_brand("Apple iPhone 16 Plus (White, 128 GB)")
     assert wait.until(EC.visibility_of_element_located(search_results_page.SELECTED_BRAND_CLASS_NAME)).is_displayed()
 
 def test_selected_brand_and_custumize(driver,wait):
@@ -44,7 +44,7 @@ def test_selected_brand_and_custumize(driver,wait):
 def test_add_to_card(driver,wait):
     customize_product = CustomizeProductAddToCard(driver)
     customize_product.add_to_card()
-    assert "Apple iPhone 14 (Starlight, 512 GB)" in customize_product.CARDS_LIST
+    assert "Apple iPhone 16 Plus (White, 512 GB)" in customize_product.CARDS_LIST
     time.sleep(5)
 
 

@@ -13,6 +13,7 @@ class SearchResultsPage:
     SORT_HIGH_TO_LOW_XPATH = (By.XPATH, "//div[text()='Price -- High to Low']")
     SELECT_BRAND_CLASS_NAME = (By.CLASS_NAME, "KzDlHZ")
     SELECTED_BRAND_CLASS_NAME = (By.CLASS_NAME, "VU-ZEz")
+    SELECT_NEXT_BUTTON_XPATH = (By.XPATH, "//span[normalize-space()='Next']")
 
     def __init__(self, driver):
         self.driver = driver
@@ -45,20 +46,33 @@ class SearchResultsPage:
                 print(f"Successfully selected: {option}")
                 return
         print(f"Brand '{option}' not found in available filters")
+        
 
-    def select_brand(self,option):
+    def select_brand(self, option):
         time.sleep(3)
-        iphone_options = self.wait.until(EC.presence_of_all_elements_located(self.SELECT_BRAND_CLASS_NAME))
         main_window = self.driver.current_window_handle
-        for iphones in iphone_options:   
-            iphones_text = iphones.text
-            if iphones_text == option:
-                iphones.click()
-                print(f"Successfully selected: {option}")
-                self.wait.until(lambda d: len(d.window_handles) > 1)
-                for window in self.driver.window_handles:
-                    if window != main_window:
-                        self.driver.switch_to.window(window)
-                        print("Switched to new window")
-                        return
-        print(f"Iphones '{option}' not found in available list")
+
+        while True:
+            iphone_options = self.wait.until(EC.presence_of_all_elements_located(self.SELECT_BRAND_CLASS_NAME))
+
+            for iphone in iphone_options:
+                iphone_text = iphone.text
+                print(iphone_text)
+
+                if iphone_text == option:
+                    iphone.click()
+                    print(f"Successfully selected: {option}")
+                    self.wait.until(lambda d: len(d.window_handles) > 1)
+                    for window in self.driver.window_handles:
+                        if window != main_window:
+                            self.driver.switch_to.window(window)
+                            print("Switched to new window")
+                            return
+            try:
+                next_button = self.wait.until(EC.element_to_be_clickable((self.SELECT_NEXT_BUTTON_XPATH)))  
+                next_button.click()
+                print("Navigating to next page...")
+                time.sleep(2)
+            except:
+                print(f"'{option}' not found in the list across all pages.")
+                break
