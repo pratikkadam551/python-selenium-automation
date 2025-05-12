@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh '''
                     . $VENV_PATH/bin/activate
-                    pytest
+                    $VENV_PATH/bin/python -m pytest -s
                 '''
             }
         }
